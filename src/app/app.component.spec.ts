@@ -5,10 +5,17 @@ import { AppComponent } from './app.component';
 @Component({ selector: 'app-suggestion', template: '' })
 class MockSuggestionComponent {}
 
+@Component({ selector: 'app-suggestion-result', template: '' })
+class MockSuggestionResultComponent {}
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent, MockSuggestionComponent]
+      declarations: [
+        AppComponent,
+        MockSuggestionComponent,
+        MockSuggestionResultComponent
+      ]
     }).compileComponents();
   }));
 

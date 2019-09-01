@@ -21,7 +21,6 @@ describe('SuggestionComponent', () => {
         HttpClientTestingModule,
         NoopAnimationsModule,
         MatButtonModule,
-        MatCardModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule
