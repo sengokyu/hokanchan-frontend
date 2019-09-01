@@ -7,14 +7,22 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { SuggestionComponent } from './suggestion/suggestion.component';
+import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
+import { LOADING_INDICATOR_INTERCEPTOR_PROVIDERS } from './loading-indicator/loading-indicator.interceptor';
 import { SuggestionResultComponent } from './suggestion/suggestion-result.component';
+import { SuggestionComponent } from './suggestion/suggestion.component';
 
 @NgModule({
-  declarations: [AppComponent, SuggestionComponent, SuggestionResultComponent],
+  declarations: [
+    AppComponent,
+    LoadingIndicatorComponent,
+    SuggestionComponent,
+    SuggestionResultComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -25,9 +33,10 @@ import { SuggestionResultComponent } from './suggestion/suggestion-result.compon
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule
   ],
-  providers: [],
+  providers: [LOADING_INDICATOR_INTERCEPTOR_PROVIDERS],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

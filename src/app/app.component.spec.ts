@@ -8,13 +8,17 @@ class MockSuggestionComponent {}
 @Component({ selector: 'app-suggestion-result', template: '' })
 class MockSuggestionResultComponent {}
 
+@Component({ selector: 'app-loading-indicator', template: '' })
+class MockLoadingIndicatorComponent {}
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         MockSuggestionComponent,
-        MockSuggestionResultComponent
+        MockSuggestionResultComponent,
+        MockLoadingIndicatorComponent
       ]
     }).compileComponents();
   }));
