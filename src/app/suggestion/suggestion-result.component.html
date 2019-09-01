@@ -1,8 +1,6 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1em">
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
   <!-- 検索結果 -->
-  <mat-card
-    *ngFor="let suggestion of suggestions$ | async"
-  >
+  <mat-card *ngFor="let suggestion of suggestions$ | async">
     <mat-card-title>{{ suggestion.letter }}</mat-card-title>
     <mat-card-content>
       <ng-container *ngIf="suggestion.result; else noResult">
