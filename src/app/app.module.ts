@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { LOADING_INDICATOR_INTERCEPTOR_PROVIDERS } from './loading-indicator/loading-indicator.interceptor';
@@ -28,6 +29,7 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forRoot([]),
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,

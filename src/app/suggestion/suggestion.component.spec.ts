@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { SuggestionComponent } from './suggestion.component';
 
 describe('SuggestionComponent', () => {
@@ -19,6 +20,7 @@ describe('SuggestionComponent', () => {
         FormsModule,
         HttpClientTestingModule,
         NoopAnimationsModule,
+        RouterTestingModule,
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,
