@@ -1,212 +1,106 @@
 {
   "DistributionConfig": {
-    "CallerReference": "",
+    "CallerReference": "hokanchan-distribution-20190904.01",
     "Aliases": {
-      "Quantity": 0,
-      "Items": [""]
+      "Quantity": 1,
+      "Items": ["hokanchan.uart.dev"]
     },
-    "DefaultRootObject": "",
+    "DefaultRootObject": "index.html",
     "Origins": {
-      "Quantity": 0,
+      "Quantity": 2,
       "Items": [
         {
-          "Id": "",
-          "DomainName": "",
-          "OriginPath": "",
-          "CustomHeaders": {
-            "Quantity": 0,
-            "Items": [
-              {
-                "HeaderName": "",
-                "HeaderValue": ""
-              }
-            ]
-          },
+          "Id": "origin-s3",
+          "DomainName": "hokanchan.uart.dev.s3.amazonaws.com",
           "S3OriginConfig": {
             "OriginAccessIdentity": ""
-          },
+          }
+        },
+        {
+          "Id": "origin-api",
+          "DomainName": "4719bbobr6.execute-api.us-west-1.amazonaws.com",
+          "OriginPath": "/Prod/suggest",
           "CustomOriginConfig": {
-            "HTTPPort": 0,
-            "HTTPSPort": 0,
+            "HTTPPort": 80,
+            "HTTPSPort": 443,
             "OriginProtocolPolicy": "https-only",
             "OriginSslProtocols": {
-              "Quantity": 0,
-              "Items": ["TLSv1.1"]
+              "Quantity": 1,
+              "Items": ["TLSv1.2"]
             },
-            "OriginReadTimeout": 0,
-            "OriginKeepaliveTimeout": 0
-          }
-        }
-      ]
-    },
-    "OriginGroups": {
-      "Quantity": 0,
-      "Items": [
-        {
-          "Id": "",
-          "FailoverCriteria": {
-            "StatusCodes": {
-              "Quantity": 0,
-              "Items": [0]
-            }
-          },
-          "Members": {
-            "Quantity": 0,
-            "Items": [
-              {
-                "OriginId": ""
-              }
-            ]
+            "OriginReadTimeout": 60,
+            "OriginKeepaliveTimeout": 1
           }
         }
       ]
     },
     "DefaultCacheBehavior": {
-      "TargetOriginId": "",
+      "TargetOriginId": "origin-s3",
       "ForwardedValues": {
         "QueryString": true,
         "Cookies": {
-          "Forward": "all",
-          "WhitelistedNames": {
-            "Quantity": 0,
-            "Items": [""]
-          }
-        },
-        "Headers": {
-          "Quantity": 0,
-          "Items": [""]
-        },
-        "QueryStringCacheKeys": {
-          "Quantity": 0,
-          "Items": [""]
+          "Forward": "all"
         }
       },
       "TrustedSigners": {
-        "Enabled": true,
-        "Quantity": 0,
-        "Items": [""]
+        "Enabled": false,
+        "Quantity": 0
       },
       "ViewerProtocolPolicy": "redirect-to-https",
       "MinTTL": 0,
-      "AllowedMethods": {
-        "Quantity": 0,
-        "Items": ["OPTIONS"],
-        "CachedMethods": {
-          "Quantity": 0,
-          "Items": ["PUT"]
-        }
-      },
-      "SmoothStreaming": true,
-      "DefaultTTL": 0,
-      "MaxTTL": 0,
-      "Compress": true,
-      "LambdaFunctionAssociations": {
-        "Quantity": 0,
-        "Items": [
-          {
-            "LambdaFunctionARN": "",
-            "EventType": "origin-response",
-            "IncludeBody": true
-          }
-        ]
-      },
-      "FieldLevelEncryptionId": ""
+      "DefaultTTL": 259200,
+      "Compress": true
     },
     "CacheBehaviors": {
-      "Quantity": 0,
+      "Quantity": 1,
       "Items": [
         {
-          "PathPattern": "",
-          "TargetOriginId": "",
+          "PathPattern": "/api/suggest/*",
+          "TargetOriginId": "origin-api",
           "ForwardedValues": {
             "QueryString": true,
             "Cookies": {
-              "Forward": "all",
-              "WhitelistedNames": {
-                "Quantity": 0,
-                "Items": [""]
-              }
+              "Forward": "all"
             },
             "Headers": {
-              "Quantity": 0,
-              "Items": [""]
+              "Quantity": 6,
+              "Items": [
+                "Accept",
+                "Accept-Encoding",
+                "Accept-Language",
+                "Cache-Control",
+                "User-Agent",
+                "DNT"
+              ]
             },
             "QueryStringCacheKeys": {
-              "Quantity": 0,
-              "Items": [""]
+              "Quantity": 1,
+              "Items": ["q"]
             }
           },
           "TrustedSigners": {
-            "Enabled": true,
-            "Quantity": 0,
-            "Items": [""]
+            "Enabled": false,
+            "Quantity": 0
           },
           "ViewerProtocolPolicy": "allow-all",
           "MinTTL": 0,
-          "AllowedMethods": {
-            "Quantity": 0,
-            "Items": ["POST"],
-            "CachedMethods": {
-              "Quantity": 0,
-              "Items": ["PATCH"]
-            }
-          },
-          "SmoothStreaming": true,
-          "DefaultTTL": 0,
-          "MaxTTL": 0,
-          "Compress": true,
-          "LambdaFunctionAssociations": {
-            "Quantity": 0,
-            "Items": [
-              {
-                "LambdaFunctionARN": "",
-                "EventType": "origin-request",
-                "IncludeBody": true
-              }
-            ]
-          },
-          "FieldLevelEncryptionId": ""
+          "DefaultTTL": 86400,
+          "Compress": true
         }
       ]
     },
-    "CustomErrorResponses": {
-      "Quantity": 0,
-      "Items": [
-        {
-          "ErrorCode": 0,
-          "ResponsePagePath": "",
-          "ResponseCode": "",
-          "ErrorCachingMinTTL": 0
-        }
-      ]
+    "ViewerCertificate": {
+      "CloudFrontDefaultCertificate": false,
+      "ACMCertificateArn": "arn:aws:acm:us-east-1:069866334413:certificate/6bbabedf-c976-49b5-9633-f676aa7f1f2c",
+      "SSLSupportMethod": "sni-only"
     },
-    "Comment": "",
+    "Comment": "hokanchan cloudfront",
     "Logging": {
       "Enabled": true,
-      "IncludeCookies": true,
-      "Bucket": "",
-      "Prefix": ""
+      "IncludeCookies": false,
+      "Bucket": "var-logs.s3.amazonaws.com",
+      "Prefix": "cloudfront-hokanchan-"
     },
-    "PriceClass": "PriceClass_All",
-    "Enabled": true,
-    "ViewerCertificate": {
-      "CloudFrontDefaultCertificate": true,
-      "IAMCertificateId": "",
-      "ACMCertificateArn": "",
-      "SSLSupportMethod": "vip",
-      "MinimumProtocolVersion": "TLSv1_2016",
-      "Certificate": "",
-      "CertificateSource": "cloudfront"
-    },
-    "Restrictions": {
-      "GeoRestriction": {
-        "RestrictionType": "whitelist",
-        "Quantity": 0,
-        "Items": [""]
-      }
-    },
-    "WebACLId": "",
-    "HttpVersion": "http2",
-    "IsIPV6Enabled": true
+    "Enabled": true
   }
 }
