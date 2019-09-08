@@ -25,3 +25,28 @@ aws s3api put-bucket-policy --bucket ${s3bucket} --policy file://etc/aws-s3-buck
 ```sh
 aws s3 sync dist/hokanchan ${s3uri}
 ```
+
+## httpsアクセス
+
+AWS S3静的Webホストはhttpsが使えないので、別途CloudFrontを用意します。
+
+### SSL証明書の作成
+
+```sh
+# 証明書の作成を要求
+aws --region us-east-1 acm request-certificate --domain-name '*.uart.dev' --validation-method DNS
+# DNSに登録すべき検証用CNAMEレコードを表示
+aws --region us-east-1 acm describe-certificate --certificate-arn 上記コマンドで出力されたARN
+```
+
+表示されたDNS CNAMEレコードを登録します。
+
+DNSレコードを登録したら、検証されるのを待ちます。
+
+```sh
+# 検証を待つ
+aws --region us-east-1 acm wait certificate-validated --certificate-arn 上記コマンドで出力されたARN
+```
+
+
+
